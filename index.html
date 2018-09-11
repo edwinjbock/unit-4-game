@@ -27,7 +27,7 @@
   <!-- BEGIN BODY CODE -->
   <div id="wrapper">
 
-    
+
     <div class="container">
       <div class="row">
 
@@ -39,24 +39,23 @@
 
           <!-- Will disappear after a keypress -->
           <span id="htmlDirections">
-            <p>The world is full of people trying to be someone else. Do you have what it
+            <p>The world is full of people trying to be someone else. Thus, we have cosplayers. Do you have what it
               takes to
-              join in a melee with elite cosplay imitation warriors? The goal is to use your attacks on the right to
-              reach the
-              maximum damage possible WITHOUT KILLING THEM. If you go over your cosplay opponent's Hit Points then
-              you
-              will
-              have murdered a silly costumed civilian. Oh, and the attack values change every match, so good luck.
-              Click on who you want to battle and then click on your attacks.
-            </p>
+              join in a melee with some of these elite, imitation warriors? </p>
+            <!-- <hr> -->
+            <p>The goal is to use the attacks on the above-right to reach the maximum damage possible WITHOUT KILLING
+              THEM. If you go OVER your cosplay opponent's Hit Points then you will have murdered a silly, costumed
+              civilian. If you go UNDER then you lose. Oh, and the attack values change with every match, so good luck.</p>
+            <!-- <hr> -->
+            <p>To battle, you must select the cosplayer you want to fight before you choose your attacks.</p>
+            <p class="text-center"><strong>* PRESS ANY KEY TO BEGIN *</strong></p>
           </span>
-
 
           <span id="htmlAppearsAfterKeyPress">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-med-6">
 
-                <table class="results-table">
+                <table class="table table-sm table-responsive table-borderless results-table">
                   <tr>
                     <th>
                       <h6>Wins:</h6>
@@ -77,26 +76,17 @@
                       </h6>
                     </td>
                   </tr>
-                  <tr>
-                    <th>
-                      <h6>Attacks Remaining:</h6>
-                    </th>
-                    <td>
-                      <h6>
-                        <span id="htmlAttacksRemaining"></span>
-                      </h6>
-                    </td>
-                  </tr>
                 </table>
               </div>
 
               <div class="col-med-6">
                 <!-- Damage and Hit Points -->
-                <table class="damageAndHitPoints">
+                <table class="table table-sm table-responsive table-borderless damageAndHitPoints">
                   <tr>
-                    <th colspan="2">
+                    <th>
                       <h6>Damage</h6>
                     </th>
+                    <th></th>
                     <th>
                       <h6>Hit Points</h6>
                     </th>
@@ -129,41 +119,34 @@
           </h5>
         </div> <!-- End of .col-sm-6 for jumbotron-left -->
 
-        <!-- </span> End of #htmlDisappearAfterKeyPress -->
+        <!-- Jumbotron Right side -->
+        <div class="col-sm-6 jumbotron jumbotron-fluid my-jumbotron-right">
 
-
-
-
-      <!-- Jumbotron Right side -->
-      <div class="col-sm-6 jumbotron jumbotron-fluid my-jumbotron-right">
-
-        <!-- Attacks -->
-        <div class="row">
-          <div class="col-sm-12 attacks">
-            <img src="assets/images/attack_lightning.jpg" alt="Lightning" class="img-fluid">
-            <img src="assets/images/attack_freezeball.jpg" alt="Freezeball" class="img-fluid">
-            <img src="assets/images/attack_fireball.jpg" alt="Fireball" class="img-fluid">
-            <img src="assets/images/attack_x-ray.jpg" alt="X-ray" class="img-fluid">
+          <!-- Attacks -->
+          <div class="row">
+            <div class="col-sm-12 attacks">
+              <img src="assets/images/attack_lightning.jpg" alt="Lightning" class="img-fluid">
+              <img src="assets/images/attack_freezeball.jpg" alt="Freezeball" class="img-fluid">
+              <img src="assets/images/attack_fireball.jpg" alt="Fireball" class="img-fluid">
+              <img src="assets/images/attack_x-ray.jpg" alt="X-ray" class="img-fluid">
+            </div>
           </div>
-        </div>
 
-        <!-- Warriors -->
-        <div class="row">
-          <div class="col-sm-12 warriors text-center">
-            <img src="assets/images/jade.jpg" alt="Jade" id="jadeImg" class="img-fluid my-img-warriors">
-            <img src="assets/images/sub-zero.jpg" alt="Sub-Zero" id="sub-zeroImg" class="img-fluid my-img-warriors">
-            <img src="assets/images/mileena.jpg" alt="Mileena" id="mileenaImg" class="img-fluid my-img-warriors">
-            <img src="assets/images/raiden.jpg" alt="Raiden" id="raidenImg" class="img-fluid my-img-warriors">
-            <img src="assets/images/kitana.jpg" alt="Raiden" id="kitanaImg" class="img-fluid my-img-warriors">
-            <img src="assets/images/liu-kang.jpg" alt="Raiden" id="liu-kangImg" class="img-fluid my-img-warriors">
+          <!-- Warriors -->
+          <div class="row">
+            <div class="col-sm-12 warriors text-center">
+              <img src="assets/images/jade.jpg" alt="Jade" id="jadeImg" class="img-fluid my-img-warriors">
+              <img src="assets/images/sub-zero.jpg" alt="Sub-Zero" id="sub-zeroImg" class="img-fluid my-img-warriors">
+              <img src="assets/images/mileena.jpg" alt="Mileena" id="mileenaImg" class="img-fluid my-img-warriors">
+              <img src="assets/images/raiden.jpg" alt="Raiden" id="raidenImg" class="img-fluid my-img-warriors">
+              <img src="assets/images/kitana.jpg" alt="Raiden" id="kitanaImg" class="img-fluid my-img-warriors">
+              <img src="assets/images/liu-kang.jpg" alt="Raiden" id="liu-kangImg" class="img-fluid my-img-warriors">
+            </div>
           </div>
-        </div>
-      </div> <!-- end of .col-sm-6 -->
-    </div> <!-- .row -->
-  </div> <!-- End of .container -->
+        </div> <!-- end of .col-sm-6 -->
+      </div> <!-- .row -->
+    </div> <!-- End of .container -->
   </div> <!-- End of Wrapper -->
-
-
 
 
   <!-- END OF BODY CODE -->

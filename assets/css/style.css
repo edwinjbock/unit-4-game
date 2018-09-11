@@ -2,30 +2,22 @@
   /* Empty */
 }
 
-html, body { /* Force the contents of the page to appear in the browser window */
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+body {
+  /* Empty */
 }
 
 .jumbotron, 
 .jumbotron-fluid {
   margin: 0; /* Tweak Bootstrap's Jumbotron Margins */
   padding: 0 20px 0 20px;
-  background: black;
+  background: #060203; /* Because pure Black makes too much contrast for the eyes */
 }
 
-h1 {
-  color:white;
-}
-
-#htmlDisappearAfterKeyPress {
-  color:white;
-}
-
-#htmlAppearAfterKeyPress {
+h1,
+#htmlDisappearAfterKeyPress,
+#htmlAppearAfterKeyPress,
+p,
+h6 {
   color: white;
 }
 
@@ -41,23 +33,21 @@ h1 {
 .my-jumbotron-left {
   padding: 0 20px 0 20px;
   margin: 0;
-  display:block;
+  /* display: block; */
 
 } 
 .my-jumbotron-right {
   padding: 0 20px 0 20px;
-  filter: brightness(100%);
-  overflow: auto;
+  overflow: default;
   float: left;
 }
 
 .logo img { /* Main Logo top-left */
   object-fit: cover;
-  /* max-width: 350px; */
 }
 
 .attacks { /* Holds the Attack Images */
-  margin: 10px auto 10px auto;
+  margin: 0px auto 0px auto;
   display: inline;
   float: left;
   text-align: center;
@@ -72,7 +62,7 @@ h1 {
 }
 
 .warriors { /* The warriors on the right */
-  margin: 10px auto 10px auto;
+  margin: 0px auto 0px auto;
   display: inline;
   float: left;
   text-align: center;
@@ -83,26 +73,20 @@ h1 {
   overflow: none;
   object-fit: contain;
   border: 2px orangered;
-  padding: 10px 10px 0px 10px;
-}
-
-p,
-h6 {
-  color: white;
+  padding: 5px 0px 0px 5px;
 }
 
 table {
-  /* text-align: center; */
-  margin: 0 auto 0 auto;
+  margin: 0;
 }
 
  td, th {
   text-align: left;
+  padding: 0 5px 0 5px;
  }
 
 .results-table table {
   margin: 0;
-  border: none;
 }
 
 .results-table th {
@@ -122,8 +106,8 @@ table {
   text-align: cemter;
 }
 
-/* TESTING */
-  /* div {
+/* TESTING BORDERS */
+  div {
     border: 1px solid green;
   }
   .container {
@@ -140,4 +124,4 @@ table {
   }
   table {
     border: 2px yellow solid;
-  } */
+  }
