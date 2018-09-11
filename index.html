@@ -24,120 +24,146 @@
 </head>
 
 <body>
+  <!-- BEGIN BODY CODE -->
   <div id="wrapper">
-    <!-- BEGIN BODY CODE -->
-    <!-- Jumbotron with the game name, etc. -->
-    <div class="container my-jumbotron-container">
+
+    
+    <div class="container">
       <div class="row">
+
         <!-- Jumbotron left side -->
-        <div class="col-sm-6">
-          <div class="jumbotron jumbotron-fluid col-sm-6 my-jumbotron-left my-image-container">
-            <!-- Logo -->
-            <img src="assets/images/logo.png" alt="logo" class="logo img-fluid">
-            <br>
+        <div class="col-sm-6 jumbotron jumbotron-fluid my-jumbotron-left">
+          <!-- Logo -->
+          <img src="assets/images/logo.png" alt="logo" class="logo img-fluid">
+          <br>
 
-            <!-- Will disappear after a keypress -->
-
-            <span id="htmlDirections">
-              <p>The world is full of people trying to be someone else. Do you have what it
-                takes to
-                join in a melee with elite cosplay imitation warriors? The goal is to use your attacks on the right to
-                reach the
-                maximum damage possible WITHOUT KILLING THEM. If you go over your cosplay opponent's Hit Points then
-                you
-                will
-                have murdered a silly costumed civilian. Oh, and the attack values change every match, so good luck.
-                Click on who you want to battle and then click on your attacks.
-              </p>
-            </span>
+          <!-- Will disappear after a keypress -->
+          <span id="htmlDirections">
+            <p>The world is full of people trying to be someone else. Do you have what it
+              takes to
+              join in a melee with elite cosplay imitation warriors? The goal is to use your attacks on the right to
+              reach the
+              maximum damage possible WITHOUT KILLING THEM. If you go over your cosplay opponent's Hit Points then
+              you
+              will
+              have murdered a silly costumed civilian. Oh, and the attack values change every match, so good luck.
+              Click on who you want to battle and then click on your attacks.
+            </p>
+          </span>
 
 
-            <span id="htmlAfterKeyPress">
-              <table class="my-table">
-                <tr>
-                  <th>
-                    <p>Wins:</p>
-                  </th>
-                  <td>
-                    <p>
-                      <span id="htmlWins"></span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <p>Losses:</p>
-                  </th>
-                  <td>
-                    <p>
-                      <span id="htmlLosses"></span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <p>Attacks Remaining:</p>
-                  </th>
-                  <td>
-                    <p>
-                      <span id="htmlAttacksRemaining"></span>
-                    </p>
-                  </td>
-                </tr>
-              </table>
-
-
-
-
-              <h4 class="results" id="my-result">
-                <span id="htmlMessage">#results</span>
-              </h4>
-              <h5 class="random" id="my-result">
-                <span id="htmlRandom">#random</span>
-              </h5>
-            </span>
-          </div> <!-- End of Jumbotron-Left -->
-        </div>
-      </div> <!-- End .row -->
-    </div> <!-- End .container on left side -->
-
-
-
-    <!-- Jumbotron Right side -->
-    <div class="container my-jumbotron-container">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="jumbotron jumbotron-fluid my-jumbotron-right my-image-container">
+          <span id="htmlAppearsAfterKeyPress">
             <div class="row">
-              <div class="attacks">
-                <img src="assets/images/attack_lightning.jpg" alt="Lightning" class="img-fluid">
-                <img src="assets/images/attack_freezeball.jpg" alt="Freezeball" class="img-fluid">
-                <img src="assets/images/attack_fireball.jpg" alt="Fireball" class="img-fluid">
-                <img src="assets/images/attack_x-ray.jpg" alt="X-ray" class="img-fluid">
-              </div>
-            </div>
+              <div class="col-sm-6">
 
-            <div class="row">
-              <!-- Warriors -->
-              <div class="text-center warriors">
-                <img src="assets/images/jade.jpg" width="45%" max-height=300px alt="Jade" id="jadeImg" class="img-fluid my-img-warriors">
-                <img src="assets/images/sub-zero.jpg" width="45%" max-height=300px alt="Sub-Zero" id="sub-zeroImg"
-                  class="img-fluid my-img-warriors">
-                <img src="assets/images/mileena.jpg" width="45%" max-height=300px alt="Mileena" id="mileenaImg" class="img-fluid my-img-warriors">
-                <img src="assets/images/raiden.jpg" width="45%" max-height=300px alt="Raiden" id="raidenImg" class="img-fluid my-img-warriors">
-                <img src="assets/images/kitana.jpg" width="45%" max-height=300px alt="Raiden" id="kitanaImg" class="img-fluid my-img-warriors">
-                <img src="assets/images/liu-kang.jpg" width="45%" max-height=300px alt="Raiden" id="liu-kangImg" class="img-fluid my-img-warriors">
+                <table class="results-table">
+                  <tr>
+                    <th>
+                      <h6>Wins:</h6>
+                    </th>
+                    <td>
+                      <h6>
+                        <span id="htmlWins"></span>
+                      </h6>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <h6>Losses:</h6>
+                    </th>
+                    <td>
+                      <h6>
+                        <span id="htmlLosses"></span>
+                      </h6>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <h6>Attacks Remaining:</h6>
+                    </th>
+                    <td>
+                      <h6>
+                        <span id="htmlAttacksRemaining"></span>
+                      </h6>
+                    </td>
+                  </tr>
+                </table>
               </div>
-            </div>
+
+              <div class="col-med-6">
+                <!-- Damage and Hit Points -->
+                <table class="damageAndHitPoints">
+                  <tr>
+                    <th colspan="2">
+                      <h6>Damage</h6>
+                    </th>
+                    <th>
+                      <h6>Hit Points</h6>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h1>
+                        <span id="htmlDamage">100</span>
+                      </h1>
+                    </td>
+                    <td>
+                      <h6>&nbsp;of&nbsp;</h6>
+                    </td>
+                    <td>
+                      <h1>
+                        <span id="htmlHitPoints">120</span>
+                      </h1>
+                    </td>
+                  </tr>
+                </table>
+              </div> <!-- end of .col-med-6 for damage and hit points-->
+            </div> <!-- end of .row listing tables -->
+          </span> <!-- End of #htmlAppearsAfterKeyPress -->
+
+          <h4 class="results" id="my-result">
+            <span id="htmlMessage">#results</span>
+          </h4>
+          <h5 class="random" id="my-result">
+            <span id="htmlRandom">#random</span>
+          </h5>
+        </div> <!-- End of .col-sm-6 for jumbotron-left -->
+
+        <!-- </span> End of #htmlDisappearAfterKeyPress -->
+
+
+
+
+      <!-- Jumbotron Right side -->
+      <div class="col-sm-6 jumbotron jumbotron-fluid my-jumbotron-right">
+
+        <!-- Attacks -->
+        <div class="row">
+          <div class="col-sm-12 attacks">
+            <img src="assets/images/attack_lightning.jpg" alt="Lightning" class="img-fluid">
+            <img src="assets/images/attack_freezeball.jpg" alt="Freezeball" class="img-fluid">
+            <img src="assets/images/attack_fireball.jpg" alt="Fireball" class="img-fluid">
+            <img src="assets/images/attack_x-ray.jpg" alt="X-ray" class="img-fluid">
           </div>
-        </div> <!-- End of Jumbotron-Right -->
-      </div>
-    </div> <!-- End of Row containing Jumbotron -->
-  </div>
-  </div> <!-- End of Jumbotron -->
-  </div>
-  </div> <!-- End of Row within Container -->
-  </div> <!-- End of initial container -->
+        </div>
+
+        <!-- Warriors -->
+        <div class="row">
+          <div class="col-sm-12 warriors text-center">
+            <img src="assets/images/jade.jpg" alt="Jade" id="jadeImg" class="img-fluid my-img-warriors">
+            <img src="assets/images/sub-zero.jpg" alt="Sub-Zero" id="sub-zeroImg" class="img-fluid my-img-warriors">
+            <img src="assets/images/mileena.jpg" alt="Mileena" id="mileenaImg" class="img-fluid my-img-warriors">
+            <img src="assets/images/raiden.jpg" alt="Raiden" id="raidenImg" class="img-fluid my-img-warriors">
+            <img src="assets/images/kitana.jpg" alt="Raiden" id="kitanaImg" class="img-fluid my-img-warriors">
+            <img src="assets/images/liu-kang.jpg" alt="Raiden" id="liu-kangImg" class="img-fluid my-img-warriors">
+          </div>
+        </div>
+      </div> <!-- end of .col-sm-6 -->
+    </div> <!-- .row -->
+  </div> <!-- End of .container -->
+  </div> <!-- End of Wrapper -->
+
+
 
 
   <!-- END OF BODY CODE -->
@@ -156,7 +182,7 @@
 
   <!-- MY JAVASCRIPT -->
   <script type="text/javascript" src="assets/javascript/game.js"></script>
-  </div> <!-- End of "#wrapper" -->
+
 </body>
 
 </html>

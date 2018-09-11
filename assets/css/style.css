@@ -2,16 +2,13 @@
   /* Empty */
 }
 
-html, body, { /* Force the contents of the page to appear in the browser window */
+html, body { /* Force the contents of the page to appear in the browser window */
     position:fixed;
     top:0;
     bottom:0;
     left:0;
     right:0;
 }
-
-
-
 
 .jumbotron, 
 .jumbotron-fluid {
@@ -24,11 +21,11 @@ h1 {
   color:white;
 }
 
-#htmlDirections {
+#htmlDisappearAfterKeyPress {
   color:white;
 }
 
-#htmlNotDirections {
+#htmlAppearAfterKeyPress {
   color: white;
 }
 
@@ -41,53 +38,18 @@ h1 {
   font-style: italic;
 }
 
-/* .my-jumbotron-container {
-  padding: 0px; 
-  margin: 0;
-} */
-
-.jumbotron img {
-  object-fit: fill;
-}
-
 .my-jumbotron-left {
   padding: 0 20px 0 20px;
   margin: 0;
-  /* background-color: black;  */
-  /* filter: brightness(100%); */
-  /* overflow: hidden; */
-    margin: 0;
-   display:block;
+  display:block;
 
 } 
 .my-jumbotron-right {
-  padding-top: 0 0 0 0;
-  /* background-color: black;  */
+  padding: 0 20px 0 20px;
   filter: brightness(100%);
-    overflow: hidden;
-    float: left;
+  overflow: auto;
+  float: left;
 }
-
-
-
-
-
-
-
-/* .my-image-container {
-  background-color: black;
-  /* max-height: 100%;
-  min-height: 100%; */
-  /* max-width: 100%; */
-  /* min-width: 100%; */
-  /* padding: 0; */
-  /* object-fit: cover; */
-  /* overflow: hidden; */
-  /* display: block; */
-/* } */ 
-
-
-
 
 .logo img { /* Main Logo top-left */
   object-fit: cover;
@@ -95,7 +57,7 @@ h1 {
 }
 
 .attacks { /* Holds the Attack Images */
-  margin: 20px auto 20px auto;
+  margin: 10px auto 10px auto;
   display: inline;
   float: left;
   text-align: center;
@@ -110,7 +72,7 @@ h1 {
 }
 
 .warriors { /* The warriors on the right */
-  margin: 20px auto 20px auto;
+  margin: 10px auto 10px auto;
   display: inline;
   float: left;
   text-align: center;
@@ -118,31 +80,37 @@ h1 {
 
 .warriors img { /* The warrior images */
   max-width: 30%;
-  overflow: auto;
+  overflow: none;
   object-fit: contain;
   border: 2px orangered;
   padding: 10px 10px 0px 10px;
 }
 
-p {
+p,
+h6 {
   color: white;
 }
 
-/* .my-table {
-  border: none;
-} */
-
 table {
+  /* text-align: center; */
+  margin: 0 auto 0 auto;
+}
+
+ td, th {
+  text-align: left;
+ }
+
+.results-table table {
   margin: 0;
   border: none;
 }
 
-th {
+.results-table th {
   text-align: right;
   padding: 0 10px 0 0;
 }
 
-td {
+.results-table td {
   text-align: left;
   font-weight: bold;
   padding: 0 0 0 10px;
@@ -155,17 +123,21 @@ td {
 }
 
 /* TESTING */
-    div {
-      border: 1px solid green;
-    }
-    .container {
-      border: 1px cyan solid;
-    }
-
-    .row {
-      border: 1px blue solid;
-    }
-
-    .wrapper {
-      border: 1px blueviolet solid;
-    }
+  /* div {
+    border: 1px solid green;
+  }
+  .container {
+    border: 1px #c3002f solid;
+  }
+  .row {
+    border: 1px blue solid;
+  }
+  .col-sm-6 {
+    border: 1px blueviolet solid;
+  }
+  .col-med-6 {
+    border: 1px white solid;
+  }
+  table {
+    border: 2px yellow solid;
+  } */
