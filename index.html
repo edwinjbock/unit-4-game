@@ -53,63 +53,71 @@
 
           <span id="htmlAppearsAfterKeyPress">
             <div class="row">
-              <div class="col-med-6">
+              <div class="col">
+                <!-- Damage and Hit Points -->
+                <div class="table-responsive table-borderless">
+                  <table class="table table-sm table-responsive table-borderless d-flex align-items-center justify-content-around mx-auto
+                align-items-center damageAndHitPoints">
+                    <tr>
+                      <th>
+                        <h6>Damage</h6>
+                      </th>
+                      <th></th>
+                      <th>
+                        <h6>Hit Points</h6>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h1>
+                          <span id="htmlDamage">100</span>
+                        </h1>
+                      </td>
+                      <td>
+                        <h6>&nbsp;of&nbsp;</h6>
+                      </td>
+                      <td>
+                        <h1>
+                          <span id="htmlHitPoints">120</span>
+                        </h1>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
 
-                <table class="table table-sm table-responsive table-borderless results-table">
-                  <tr>
-                    <th>
-                      <h6>Wins:</h6>
-                    </th>
-                    <td>
-                      <h6>
-                        <span id="htmlWins"></span>
-                      </h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <h6>Losses:</h6>
-                    </th>
-                    <td>
-                      <h6>
-                        <span id="htmlLosses"></span>
-                      </h6>
-                    </td>
-                  </tr>
-                </table>
               </div>
 
-              <div class="col-med-6">
-                <!-- Damage and Hit Points -->
-                <table class="table table-sm table-responsive table-borderless damageAndHitPoints">
-                  <tr>
-                    <th>
-                      <h6>Damage</h6>
-                    </th>
-                    <th></th>
-                    <th>
-                      <h6>Hit Points</h6>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h1>
-                        <span id="htmlDamage">100</span>
-                      </h1>
-                    </td>
-                    <td>
-                      <h6>&nbsp;of&nbsp;</h6>
-                    </td>
-                    <td>
-                      <h1>
-                        <span id="htmlHitPoints">120</span>
-                      </h1>
-                    </td>
-                  </tr>
-                </table>
-              </div> <!-- end of .col-med-6 for damage and hit points-->
+              <div class="col"> 
+                <!-- Wins and Losses -->
+                <div class="table-responsive table-borderless">
+                  <table class="table table-sm table-responsive table-borderless d-flex align-items-center justify-content-around mx-auto align-items-center results-table">
+                    <tr>
+                      <th>
+                        <h6>Wins:</h6>
+                      </th>
+                      <td>
+                        <h6>
+                          <span id="htmlWins">0</span>
+                        </h6>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <h6>Losses:</h6>
+                      </th>
+                      <td>
+                        <h6>
+                          <span id="htmlLosses">0</span>
+                        </h6>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div> <!-- end of .col -->
+
             </div> <!-- end of .row listing tables -->
           </span> <!-- End of #htmlAppearsAfterKeyPress -->
+          <!-- </div> -->
 
           <h4 class="results" id="my-result">
             <span id="htmlMessage">#results</span>
