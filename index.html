@@ -19,93 +19,124 @@
   <!-- My Custom CSS -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-  <title>Ed Bock | The Hangman</title>
+  <title>Cosplay Mortal Kombat</title>
 
 </head>
 
 <body>
-  <!-- BEGIN BODY CODE -->
-  <!-- Jumbotron with the game name, etc. -->
-  <div class="container my-jumbotron-container">
-    <div class="row">
-      <!-- Left part of Jumbotron -->
-      <div class="col-sm-12">
-        <div class="jumbotron jumbotron-fluid my-jumbotron-container">
-          <div class="container">
+  <div id="wrapper">
+    <!-- BEGIN BODY CODE -->
+    <!-- Jumbotron with the game name, etc. -->
+    <div class="container my-jumbotron-container">
+      <div class="row">
+        <!-- Jumbotron left side -->
+        <div class="col-sm-6">
+          <div class="jumbotron jumbotron-fluid col-sm-6 my-jumbotron-left my-image-container">
+            <!-- Logo -->
+            <img src="assets/images/logo.png" alt="logo" class="logo img-fluid">
+            <br>
+
+            <!-- Will disappear after a keypress -->
+
+            <span id="htmlDirections">
+              <p>The world is full of people trying to be someone else. Do you have what it
+                takes to
+                join in a melee with elite cosplay imitation warriors? The goal is to use your attacks on the right to
+                reach the
+                maximum damage possible WITHOUT KILLING THEM. If you go over your cosplay opponent's Hit Points then
+                you
+                will
+                have murdered a silly costumed civilian. Oh, and the attack values change every match, so good luck.
+                Click on who you want to battle and then click on your attacks.
+              </p>
+            </span>
+
+
+            <span id="htmlAfterKeyPress">
+              <table class="my-table">
+                <tr>
+                  <th>
+                    <p>Wins:</p>
+                  </th>
+                  <td>
+                    <p>
+                      <span id="htmlWins"></span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <p>Losses:</p>
+                  </th>
+                  <td>
+                    <p>
+                      <span id="htmlLosses"></span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <p>Attacks Remaining:</p>
+                  </th>
+                  <td>
+                    <p>
+                      <span id="htmlAttacksRemaining"></span>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+
+
+
+              <h4 class="results" id="my-result">
+                <span id="htmlMessage">#results</span>
+              </h4>
+              <h5 class="random" id="my-result">
+                <span id="htmlRandom">#random</span>
+              </h5>
+            </span>
+          </div> <!-- End of Jumbotron-Left -->
+        </div>
+      </div> <!-- End .row -->
+    </div> <!-- End .container on left side -->
+
+
+
+    <!-- Jumbotron Right side -->
+    <div class="container my-jumbotron-container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="jumbotron jumbotron-fluid my-jumbotron-right my-image-container">
             <div class="row">
+              <div class="attacks">
+                <img src="assets/images/attack_lightning.jpg" alt="Lightning" class="img-fluid">
+                <img src="assets/images/attack_freezeball.jpg" alt="Freezeball" class="img-fluid">
+                <img src="assets/images/attack_fireball.jpg" alt="Fireball" class="img-fluid">
+                <img src="assets/images/attack_x-ray.jpg" alt="X-ray" class="img-fluid">
+              </div>
+            </div>
 
-              <!-- Jumbotron left side -->
-              <div class="col-sm-6 my-jumbotron-left my-image container">
-                <img src="assets/images/cosplay-mortal-combat.jpg" alt="logo">
-
-                <p><span id="htmlDirections">The world is full of people trying to be someone else. Do you have what it
-                    takes to
-                    join in a melee with elite cosplay warriors? The goal is to use your random-HP attacks to reach the
-                    maximum damage possible WITHOUT KILLING THEM. If you go over your opponents Hit Points then you
-                    will
-                    have murdered a silly costumed civilian. Click on who to go against and click to use your attacks.
-                  </span></p>
-                <span id="htmlNotDirections">
-                  <table class="my-table">
-                    <tr>
-                      <th>
-                        <p>Wins:</p>
-                      </th>
-                      <td>
-                        <p>
-                          <span id="htmlWins"></span>
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <p>Losses:</p>
-                      </th>
-                      <td>
-                        <p>
-                          <span id="htmlLosses"></span>
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <p>Attacks Remaining:</p>
-                      </th>
-                      <td>
-                        <p>
-                          <span id="htmlAttacksRemaining"></span>
-                        </p>
-                      </td>
-                    </tr>
-                  </table>
-
-                  <!-- Will disappear after a keypress -->
-
-
-                  <h4 class="results" id="my-result">
-                    <span id="htmlMessage"></span>
-                  </h4>
-                  <h5 class="random" id="my-result">
-                    <span id="htmlRandom"></span>
-                  </h5>
-                </span>
-              </div> <!-- End of Jumbotron-Left -->
-
-              <!-- Jumbotron right side -->
-              <div class="col-sm-6 my-jumbotron-right">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-12 text-center my-image-container">
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- End of Jumbotron-Right -->
-
-            </div> <!-- End of Row containing Jumbotron -->
+            <div class="row">
+              <!-- Warriors -->
+              <div class="text-center warriors">
+                <img src="assets/images/jade.jpg" width="45%" max-height=300px alt="Jade" id="jadeImg" class="img-fluid my-img-warriors">
+                <img src="assets/images/sub-zero.jpg" width="45%" max-height=300px alt="Sub-Zero" id="sub-zeroImg"
+                  class="img-fluid my-img-warriors">
+                <img src="assets/images/mileena.jpg" width="45%" max-height=300px alt="Mileena" id="mileenaImg" class="img-fluid my-img-warriors">
+                <img src="assets/images/raiden.jpg" width="45%" max-height=300px alt="Raiden" id="raidenImg" class="img-fluid my-img-warriors">
+                <img src="assets/images/kitana.jpg" width="45%" max-height=300px alt="Raiden" id="kitanaImg" class="img-fluid my-img-warriors">
+                <img src="assets/images/liu-kang.jpg" width="45%" max-height=300px alt="Raiden" id="liu-kangImg" class="img-fluid my-img-warriors">
+              </div>
+            </div>
           </div>
-        </div> <!-- End of Jumbotron -->
+        </div> <!-- End of Jumbotron-Right -->
       </div>
-    </div> <!-- End of Row within Container -->
+    </div> <!-- End of Row containing Jumbotron -->
+  </div>
+  </div> <!-- End of Jumbotron -->
+  </div>
+  </div> <!-- End of Row within Container -->
   </div> <!-- End of initial container -->
 
 
@@ -125,7 +156,7 @@
 
   <!-- MY JAVASCRIPT -->
   <script type="text/javascript" src="assets/javascript/game.js"></script>
-
+  </div> <!-- End of "#wrapper" -->
 </body>
 
 </html>

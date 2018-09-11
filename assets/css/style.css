@@ -2,12 +2,22 @@
   /* Empty */
 }
 
-body {
-  /* Empty */
+html, body, { /* Force the contents of the page to appear in the browser window */
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
-.jumbotron {
+
+
+
+.jumbotron, 
+.jumbotron-fluid {
   margin: 0; /* Tweak Bootstrap's Jumbotron Margins */
+  padding: 0 20px 0 20px;
+  background: black;
 }
 
 h1 {
@@ -16,6 +26,10 @@ h1 {
 
 #htmlDirections {
   color:white;
+}
+
+#htmlNotDirections {
+  color: white;
 }
 
 .results {
@@ -27,49 +41,99 @@ h1 {
   font-style: italic;
 }
 
-.my-jumbotron-container {
+/* .my-jumbotron-container {
   padding: 0px; 
+  margin: 0;
+} */
+
+.jumbotron img {
+  object-fit: fill;
 }
 
+.my-jumbotron-left {
+  padding: 0 20px 0 20px;
+  margin: 0;
+  /* background-color: black;  */
+  /* filter: brightness(100%); */
+  /* overflow: hidden; */
+    margin: 0;
+   display:block;
+
+} 
 .my-jumbotron-right {
   padding-top: 0 0 0 0;
-  background-color: black; /* #5bc0d6; */
+  /* background-color: black;  */
   filter: brightness(100%);
     overflow: hidden;
-}
-.my-jumbotron-left {
-  padding: 0;
-  margin: 0;
-  background-color: black; /* #5bc0d6; */
-  filter: brightness(100%);
-  overflow: hidden;
-    margin: 0;
-  display:block;
-  background-color: black; /* #5bc0d6; */
-
+    float: left;
 }
 
-table {
-  margin: 0;
+
+
+
+
+
+
+/* .my-image-container {
+  background-color: black;
+  /* max-height: 100%;
+  min-height: 100%; */
+  /* max-width: 100%; */
+  /* min-width: 100%; */
+  /* padding: 0; */
+  /* object-fit: cover; */
+  /* overflow: hidden; */
+  /* display: block; */
+/* } */ 
+
+
+
+
+.logo img { /* Main Logo top-left */
+  object-fit: cover;
+  /* max-width: 350px; */
+}
+
+.attacks { /* Holds the Attack Images */
+  margin: 20px auto 20px auto;
+  display: inline;
+  float: left;
+  text-align: center;
+}
+
+.attacks img { /* The attack images */
+  max-width: 20%;
+  overflow: none;
+  object-fit: contain;
+  border: 2px orangered;
+  padding: 0 10px 0 10px;
+}
+
+.warriors { /* The warriors on the right */
+  margin: 20px auto 20px auto;
+  display: inline;
+  float: left;
+  text-align: center;
+}
+
+.warriors img { /* The warrior images */
+  max-width: 30%;
+  overflow: auto;
+  object-fit: contain;
+  border: 2px orangered;
+  padding: 10px 10px 0px 10px;
 }
 
 p {
   color: white;
 }
 
-.my-image-container {
-  background-color: black;
-  /* max-height: 100%;
-  min-height: 100%; */
-  max-width: 100%;
-  min-width: 100%;
-  padding: 0;
-  object-fit: contain;
-  overflow: hidden;
-  display: block;
-}
+/* .my-table {
+  border: none;
+} */
 
-.my-table {
+table {
+  margin: 0;
   border: none;
 }
 
@@ -90,6 +154,18 @@ td {
   text-align: cemter;
 }
 
-img {
-  filter: brightness(100%);
-}
+/* TESTING */
+    div {
+      border: 1px solid green;
+    }
+    .container {
+      border: 1px cyan solid;
+    }
+
+    .row {
+      border: 1px blue solid;
+    }
+
+    .wrapper {
+      border: 1px blueviolet solid;
+    }
