@@ -6,9 +6,11 @@ $(document).ready(function () {
   var losses = 0;
   var initialClickEvent = false;
   var cosplayerAlreadyBattled = [];
+  var randomHitPoints = 0;
   var cosplayerRandomlyChosen; // current cosplayer randomly checked
   var cosplayer = {
     name: ["Jade", "Sub-Zero", "Mileena", "Raiden", "Kitana", "Liu-Kang"],
+    preName: ["Phony-", "Faux-", "Fake-", "Not-Real-", "Counterfeit-", "Fake-"],
     imageLocationID: [
       "#htmlJadeImg",
       "#htmlSubZeroImg",
@@ -32,6 +34,14 @@ $(document).ready(function () {
       "<img src='assets/images/raiden_bw.png' alt='Raiden'>",
       "<img src='assets/images/kitana_bw.png' alt='Kitana'>",
       "<img src='assets/images/liu-kang_bw.png' alt='Liu-Kang'>"
+    ],
+    imageBWi: [
+      "<img src='assets/images/jade_bwi.png' alt='Jade'>",
+      "<img src='assets/images/sub-zero_bwi.png' alt='Sub-Zero'>",
+      "<img src='assets/images/mileena_bwi.png' alt='Mileena'>",
+      "<img src='assets/images/raiden_bwi.png' alt='Raiden'>",
+      "<img src='assets/images/kitana_bwi.png' alt='Kitana'>",
+      "<img src='assets/images/liu-kang_bwi.png' alt='Liu-Kang'>"
     ]
   };
   var attacks = {
@@ -54,7 +64,6 @@ $(document).ready(function () {
         // then result is a new value
         newCosplayer = true;
         console.log("newCosplayer=" + newCosplayer);
-        console.log("cosplayer.name[result]=" + cosplayer.name[result]);
         // add "result" to the cosplayerAlreadyBattled array
         cosplayerAlreadyBattled.push(result);
         // change the cosplayer's image to black and white
@@ -67,15 +76,24 @@ $(document).ready(function () {
 
   function chooseRandomAttackValues() {
     // must be between 1-12
+    var value;
     for (i = 0; i < attacks.name.length; i++) {
-      attacks.attackValue[i] = [Math.floor(Math.random() * 12)];
-      if (attacks.attackValue[i] == 0) {
-        (attacks.attackValue[i])++;
+      value = [Math.floor(Math.random() * 12)];
+      if (value == 0) {
+        value++;
       }
+      (attacks.attackValue).push(value);
     }
-    console.log("attacks.attackValue[" + i + "]=" + attacks.attackValue[i]);
-    
+    console.log("attacks.attackValue=" + attacks.attackValue);
   } // end of function chooseRandomAttackValues
+
+  function chooseRandomHitPoints() {
+    // must be between 19-120
+    var value = [Math.floor(Math.random() * 120)];
+    if ((value >= 19) && (value <= 120)) {
+      return value;
+    }
+  }
 
   function resetGameBoard() { // run when all six are done being battled
     $("#htmlResult").text("");
@@ -115,18 +133,22 @@ $(document).ready(function () {
       $("#htmlMessage").text("");
     }
 
+    // ****************************************************************
 
-
-    // NEED A LOOP HERE TO THE END!!!!!!!!!!!!!!!!!!!!!!
-    ``
-    // Choose a random cosplayer
+    // Choose a random cosplayer that hasn't been attacked this round
     cosplayerRandomlyChosen = chooseRandomCosplayer();
     console.log("Random Player: " + cosplayerRandomlyChosen);
 
-    $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+    // Change their picture to black and white inverted. Then send a msg who is being attacked
+    $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBWi[cosplayerRandomlyChosen]);
+    $("#htmlMessage").text("You are fighting " + cosplayer.preName[cosplayerRandomlyChosen] + cosplayer.name[cosplayerRandomlyChosen]);
 
-    // chooseRandomAttackValues(); 
+    // chooseRandomHitPoints(); 
+    randomHitPoints = chooseRandomHitPoints();
+    $("#htmlHitPoints").text(randomHitPoints);
 
+    // choose random attack values
+    chooseRandomAttackValues();
 
 
     // ATTACK
@@ -153,7 +175,7 @@ $(document).ready(function () {
     // Reset after win or loss
 
 
-
+    // ************************************************************************
 
   }); // End of click event
 
