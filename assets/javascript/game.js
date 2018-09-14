@@ -19,32 +19,28 @@ $(document).ready(function () {
       "#htmlMileenaImg",
       "#htmlRaidenImg",
       "#htmlKitanaImg",
-      "#htmlLiuKangImg"
-    ],
+      "#htmlLiuKangImg"],
     imageColor: [
       "<img src='assets/images/jade.png' alt='Jade'>",
       "<img src='assets/images/sub-zero.png' alt='Sub-Zero'>",
       "<img src='assets/images/mileena.png' alt='Mileena'>",
       "<img src='assets/images/raiden.png' alt='Raiden'>",
       "<img src='assets/images/kitana.png' alt='Kitana'>",
-      "<img src='assets/images/liu-kang.png' alt='Liu-Kang'>"
-    ],
+      "<img src='assets/images/liu-kang.png' alt='Liu-Kang'>"],
     imageBW: [
       "<img src='assets/images/jade_bw.png' alt='Jade'>",
       "<img src='assets/images/sub-zero_bw.png' alt='Sub-Zero'>",
       "<img src='assets/images/mileena_bw.png' alt='Mileena'>",
       "<img src='assets/images/raiden_bw.png' alt='Raiden'>",
       "<img src='assets/images/kitana_bw.png' alt='Kitana'>",
-      "<img src='assets/images/liu-kang_bw.png' alt='Liu-Kang'>"
-    ],
+      "<img src='assets/images/liu-kang_bw.png' alt='Liu-Kang'>"],
     imageBWi: [
       "<img src='assets/images/jade_bwi.png' alt='Jade'>",
       "<img src='assets/images/sub-zero_bwi.png' alt='Sub-Zero'>",
       "<img src='assets/images/mileena_bwi.png' alt='Mileena'>",
       "<img src='assets/images/raiden_bwi.png' alt='Raiden'>",
       "<img src='assets/images/kitana_bwi.png' alt='Kitana'>",
-      "<img src='assets/images/liu-kang_bwi.png' alt='Liu-Kang'>"
-    ]
+      "<img src='assets/images/liu-kang_bwi.png' alt='Liu-Kang'>"]
   };
   var attacks = {
     name: ["Lightening", "Freezeball", "Fireball", "X-ray"],
@@ -135,60 +131,59 @@ $(document).ready(function () {
       // Clears the You Won/You Lost message
       $("#htmlResult").text("");
       $("#htmlMessage").text("");
-    }
 
-    // Choose a random cosplayer that hasn't been attacked this round
-    cosplayerRandomlyChosen = chooseRandomCosplayer();
-    console.log("Random Player: " + cosplayerRandomlyChosen);
 
-    // Change their picture to black and white inverted. Then send a msg who is being attacked
-    $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBWi[cosplayerRandomlyChosen]);
-    $("#htmlMessage").text("You are fighting " + cosplayer.preName[cosplayerRandomlyChosen] + cosplayer.name[cosplayerRandomlyChosen]);
+      // Choose a random cosplayer that hasn't been attacked this round
+      cosplayerRandomlyChosen = chooseRandomCosplayer();
+      console.log("Random Player: " + cosplayerRandomlyChosen);
 
-    // chooseRandomHitPoints(); 
-    randomHitPoints = chooseRandomHitPoints();
-    $("#htmlHitPoints").text(randomHitPoints);
+      // Change their picture to black and white inverted. Then send a msg who is being attacked
+      $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBWi[cosplayerRandomlyChosen]);
+      $("#htmlMessage").text("You are fighting " + cosplayer.preName[cosplayerRandomlyChosen] + cosplayer.name[cosplayerRandomlyChosen]);
 
-    // choose random attack values
-    chooseRandomAttackValues();
+      // chooseRandomHitPoints(); 
+      randomHitPoints = chooseRandomHitPoints();
+      $("#htmlHitPoints").text(randomHitPoints);
 
+      // choose random attack values
+      chooseRandomAttackValues();
+    } // end of "if (initialClickEvent === false)"
+
+    // ******************* NEED TO FINISH FROM HERE ON DOWN *******************************
+    //  PROBLEM: 
+
+    // ATTACKS
+    $("#htmlLightningImg").click(function () {
+      // Click on Lightning
+    });
+
+    $("#htmlFreezeballImg").click(function () {
+      // Click on Freezeball
+    });
+
+    $("#htmlFireballImg").click(function () {
+      // Click on Fireball
+    });
+
+    $("#htmlXRayImg").click(function () {
+      // Click on X-Ray
+    });
+
+
+    // Check for win or loss
+    // don't forget about audio files for kills
+
+
+    // Reset after win or loss
+    initialClickEvent = false; // allows for $(document).click again
+    //change the player's image to black and white IF they did not die
+    //if they died, change their image to death.png
+
+
+    //Reset the gameboard after all cosplayers have been battled
+
+
+    // ************************************************************************
   }); // End of $(document).click(function ()
-
-  // ******************* NEED TO FINISH FROM HERE ON DOWN *******************************
-  //  PROBLEM: 
-
-  // ATTACK
-  $("#htmlLightningImg").click(function () {
-    // Click on Lightning
-  });
-
-  $("#htmlFreezeballImg").click(function () {
-    // Click on Freezeball
-  });
-
-  $("#htmlFireballImg").click(function () {
-    // Click on Fireball
-  });
-
-  $("#htmlXRayImg").click(function () {
-    // Click on X-Ray
-  });
-
-
-  // Check for win or loss
-  // don't forget about audio files for losses
-
-
-  // Reset after win or loss
-  initialClickEvent = false; // allows for $(document).click again
-  //change the player's image to black and white IF they did not die
-  //if they died, change their image to death.png
-
-
-  // ************************************************************************
-
-
-
-
 }); // end of $(document).ready(function()
 // End of file
