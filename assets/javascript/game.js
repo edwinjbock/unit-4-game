@@ -7,10 +7,12 @@ $(document).ready(function () {
   var initialClickEvent = false;
   var cosplayerAlreadyBattled = [];
   var randomHitPoints = 0;
+  var damagePoints = 0;
   var cosplayerRandomlyChosen; // current cosplayer randomly checked
   var cosplayer = {
     name: ["Jade", "Sub-Zero", "Mileena", "Raiden", "Kitana", "Liu-Kang"],
     preName: ["Phony-", "Faux-", "Fake-", "Not-Real-", "Counterfeit-", "Fake-"],
+    gender: ["female", "male", "female", "male", "female", "male",],
     imageLocationID: [
       "#htmlJadeImg",
       "#htmlSubZeroImg",
@@ -98,6 +100,8 @@ $(document).ready(function () {
   function resetGameBoard() { // run when all six are done being battled
     $("#htmlResult").text("");
     $("#htmlMessage").text("");
+    $("#htmlHitPoints").text("");
+    $("#htmlDamagePoints").text("0");
     // reset cosplayer images to color
     for (i = 0; i < cosplayer.length; i++) {
       $(cosplayer[i].imageLocationID).html(cosplayer[i].imageColor);
@@ -133,8 +137,6 @@ $(document).ready(function () {
       $("#htmlMessage").text("");
     }
 
-    // ****************************************************************
-
     // Choose a random cosplayer that hasn't been attacked this round
     cosplayerRandomlyChosen = chooseRandomCosplayer();
     console.log("Random Player: " + cosplayerRandomlyChosen);
@@ -150,34 +152,42 @@ $(document).ready(function () {
     // choose random attack values
     chooseRandomAttackValues();
 
+  }); // End of $(document).click(function ()
 
-    // ATTACK
-    $("#htmlLightningImg").click(function () {
-      // Click on Lightning
-    });
+  // ******************* NEED TO FINISH FROM HERE ON DOWN *******************************
+  //  PROBLEM: 
 
-    $("#htmlFreezeballImg").click(function () {
-      // Click on Freezeball
-    });
+  // ATTACK
+  $("#htmlLightningImg").click(function () {
+    // Click on Lightning
+  });
 
-    $("#htmlFireballImg").click(function () {
-      // Click on Fireball
-    });
+  $("#htmlFreezeballImg").click(function () {
+    // Click on Freezeball
+  });
 
-    $("#htmlXRayImg").click(function () {
-      // Click on X-Ray
-    });
+  $("#htmlFireballImg").click(function () {
+    // Click on Fireball
+  });
 
-
-    // Check for win or loss
-
-
-    // Reset after win or loss
+  $("#htmlXRayImg").click(function () {
+    // Click on X-Ray
+  });
 
 
-    // ************************************************************************
+  // Check for win or loss
+  // don't forget about audio files for losses
 
-  }); // End of click event
+
+  // Reset after win or loss
+  initialClickEvent = false; // allows for $(document).click again
+  //change the player's image to black and white IF they did not die
+  //if they died, change their image to death.png
+
+
+  // ************************************************************************
+
+
 
 
 }); // end of $(document).ready(function()
