@@ -46,28 +46,35 @@ $(document).ready(function () {
     do {
       var result = [Math.floor(Math.random() * cosplayer.name.length)];
       console.log("chooseRandomCosplayer result is " + result);
-      // Check to see if that cosplayer has been battled already by comparing to the cosplayerAlreadyBattled array
-      if (jQuery.inArray(result, cosplayerAlreadyBattled) != '-1') {
+      console.log("newCosplayer=" + newCosplayer);
+      console.log("cosplayer.name[result]=" + cosplayer.name[result]);
+
+      // Check to see if that cosplayer has battled already by comparing to the cosplayerAlreadyBattled array
+      if (jQuery.inArray(result, cosplayerAlreadyBattled) == "-1") {
         // then result is a new value
-        newCosplayer = true
+        newCosplayer = true;
+        console.log("newCosplayer=" + newCosplayer);
+        console.log("cosplayer.name[result]=" + cosplayer.name[result]);
         // add "result" to the cosplayerAlreadyBattled array
         cosplayerAlreadyBattled.push(result);
         // change the cosplayer's image to black and white
-        $(cosplayer[cosplayerRandomlyChosen].imageLocationID).html(cosplayer[cosplayerRandomlyChosen].imageBW);
+        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
         // then return the result
         return result;
       }
-    } while (newCosplayer == false) // end of do-while loop
+    } while (newCosplayer != true) // end of do-while loop
   } // end of chooseRandomCosplayer function
 
   function chooseRandomAttackValues() {
     // must be between 1-12
     for (i = 0; i < attacks.name.length; i++) {
-      attacks[i].attackValue = [Math.floor(Math.random() * 12)];
-      if (attacks[i].attackValue == 0) {
-        attacks[i].attackValue++;
+      attacks.attackValue[i] = [Math.floor(Math.random() * 12)];
+      if (attacks.attackValue[i] == 0) {
+        (attacks.attackValue[i])++;
       }
     }
+    console.log("attacks.attackValue[" + i + "]=" + attacks.attackValue[i]);
+    
   } // end of function chooseRandomAttackValues
 
   function resetGameBoard() { // run when all six are done being battled
@@ -111,13 +118,33 @@ $(document).ready(function () {
 
 
     // NEED A LOOP HERE TO THE END!!!!!!!!!!!!!!!!!!!!!!
-    
+    ``
     // Choose a random cosplayer
     cosplayerRandomlyChosen = chooseRandomCosplayer();
     console.log("Random Player: " + cosplayerRandomlyChosen);
-    chooseRandomAttackValues(); 
+
+    $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+
+    // chooseRandomAttackValues(); 
 
 
+
+    // ATTACK
+    $("#htmlLightningImg").click(function () {
+      // Click on Lightning
+    });
+
+    $("#htmlFreezeballImg").click(function () {
+      // Click on Freezeball
+    });
+
+    $("#htmlFireballImg").click(function () {
+      // Click on Fireball
+    });
+
+    $("#htmlXRayImg").click(function () {
+      // Click on X-Ray
+    });
 
 
     // Check for win or loss
