@@ -159,6 +159,9 @@ $(document).ready(function () {
     attacks.attackValue = [];
 
     initialClickEvent = false; // allows for $(document).click again
+      
+    // don't forget about audio files for kills
+
   } // end of function newLoss
 
 
@@ -211,12 +214,13 @@ $(document).ready(function () {
     } // end of "if (initialClickEvent === false)"
   }); // End of $(document).click(function ()
 
-  if (initialClickEvent === true) { // then allow for ONLY attacks 
+  //  if (initialClickEvent === true) { // then allow for ONLY attacks 
 
-    // ATTACKS
+  // ATTACKS
 
-    // Click on Lightning
-    $("#htmlLightningImg").click(function () {
+  // Click on Lightning
+  $("#htmlLightningImg").click(function () {
+    if (initialClickEvent === true) {
       var afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
       damagePoints = damagePoints + attacks.attackValue[0];
@@ -231,65 +235,78 @@ $(document).ready(function () {
       else if (afterAttack == "neither") {
         // do nothing
       }
-    });
+    }
+  });
 
-    // Click on Freezeball
-    // $("#htmlFreezeballImg").click(function () {
-    //   var afterAttack = ""; 
-    //   console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
-    //   damagePoints = damagePoints + attacks.attackValue[1];
-    //   $("#htmlDamagePoints").text(damagePoints);
-    //   afterAttack = checkForWinOrLoss()
-    //   if (afterAttack == "win") {
-    //     newWin();
-    //   }
-    //   else if (afterAttack == "loss") {
-    //     newLoss();
-    //   }
-    //   else if (afterAttack == "neither") {
+  // Click on Freezeball
+  $("#htmlFreezeballImg").click(function () {
+    if (initialClickEvent === true) {
+      var afterAttack = ""; // reset
+      console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[1]);
+      damagePoints = damagePoints + attacks.attackValue[1];
+      $("#htmlDamagePoints").text(damagePoints);
+      afterAttack = checkForWinOrLoss();
+      if (afterAttack == "win") {
+        newWin();
+      }
+      else if (afterAttack == "loss") {
+        newLoss();
+      }
+      else if (afterAttack == "neither") {
+        // do nothing
+      }
+    }
+  });
 
-    //   }
-    // });
+  // Click on Fireball
+  $("#htmlFireballImg").click(function () {
+    if (initialClickEvent === true) {
+      var afterAttack = ""; // reset
+      console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[2]);
+      damagePoints = damagePoints + attacks.attackValue[2];
+      $("#htmlDamagePoints").text(damagePoints);
+      afterAttack = checkForWinOrLoss();
+      if (afterAttack == "win") {
+        newWin();
+      }
+      else if (afterAttack == "loss") {
+        newLoss();
+      }
+      else if (afterAttack == "neither") {
+        // do nothing
+      }
+    }
+  });
 
-    // Click on Fireball
-    // $("#htmlFireballImg").click(function () {
-    //   console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
-    //   damagePoints = damagePoints + attacks.attackValue[2];
-    //   $("#htmlDamagePoints").text(damagePoints);
-    //   if (checkForWinOrLoss() == "win") {
-    //     newWin();
-    //   }
-    //   else if (checkForWinOrLoss() == "loss") {
-    //     newLoss();
-    //   }
-    // });
-
-    // Click on X-Ray
-    // $("#htmlXRayImg").click(function () {
-    //   console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
-    //   damagePoints = damagePoints + attacks.attackValue[3];
-    //   $("#htmlDamagePoints").text(damagePoints);
-    //   if (checkForWinOrLoss() == "win") {
-    //     newWin();
-    //   }
-    //   else if (checkForWinOrLoss() == "loss") {
-    //     newLoss();
-    //   }
-    // });
+  // Click on X-Ray
+  $("#htmlXRayImg").click(function () {
+    if (initialClickEvent === true) {
+      var afterAttack = ""; // reset
+      console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[3]);
+      damagePoints = damagePoints + attacks.attackValue[3];
+      $("#htmlDamagePoints").text(damagePoints);
+      afterAttack = checkForWinOrLoss();
+      if (afterAttack == "win") {
+        newWin();
+      }
+      else if (afterAttack == "loss") {
+        newLoss();
+      }
+      else if (afterAttack == "neither") {
+        // do nothing
+      }
+    }
+  });
 
 
-    // Check for win or loss
-    // don't forget about audio files for kills
 
 
-    // Reset after win or loss
-    //change the player's image to black and white IF they did not die
-    //if they died, change their image to death.png
+  // Reset after win or loss
+  //change the player's image to black and white IF they did not die
+  //if they died, change their image to death.png
 
 
-    //Reset the gameboard after all cosplayers have been battled
-
-  } // End of "else if" allowing for attacks
+  //Reset the gameboard after all cosplayers have been battled
 
   // ************************************************************************
 }); // end of $(document).ready(function()
