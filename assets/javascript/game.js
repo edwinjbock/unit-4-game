@@ -108,11 +108,6 @@ $(document).ready(function () {
     return value;
   }
 
-
-
-
-
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   function checkForWinOrLoss() {
     console.log("function checkForWinOrLoss()"); //TEST
     var youLose = false;
@@ -120,37 +115,41 @@ $(document).ready(function () {
     // compare damage and hitpoints
     if (damagePoints == randomHitPoints) {
       // Win
-      wins++;
       youWin = true;
-
-
-
+      console.log("return 'win'");
+      return "win";
     }
     else if (damagePoints > randomHitPoints) {
       // Loss
-      losses++;
       youLose = true;
-
-
-
+      console.log("return 'lose'");
+      return "loss";
     }
     else if (damagePoints < randomHitPoints) {
       // continue the game
-
+      console.log("return 'neither'");
+      return "neither";
     }
-    initialClickEvent = false; // allows for $(document).click again
-
-    // call newWin or newLoss if either
-    // ELSE return
   } // end of function checkForWinOrLoss
-  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   function newWin() {
     console.log("function newWin()"); //TEST
+    console.log("PREVIOUS wins=" + wins);
     wins++;
+    console.log("NEW wins=" + wins);
     $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
     attacks.attackValue = [];
+
+
+    // !!!!!!!!! NEED A WAY TO DISPLAY TO CLICK AGAIN TO CONTINUE
+
+
+
   } // end of function newWin
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
   function newLoss() {
@@ -158,6 +157,8 @@ $(document).ready(function () {
     losses++;
     $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
     attacks.attackValue = [];
+
+    initialClickEvent = false; // allows for $(document).click again
   } // end of function newLoss
 
 
@@ -178,9 +179,10 @@ $(document).ready(function () {
 
 
   // ********** Kick off and continue the game with a click event **********
+
   $(document).click(function () {
-    console.log("$(document).click(function()... initialClickEvent=" + initialClickEvent); // TEST
     if (initialClickEvent === false) {
+      console.log("$(document).click(function()... initialClickEvent=" + initialClickEvent); // TEST
       // Get rid of the directions
       $("#htmlDirections").text("");
       // record initial click event as performed
@@ -207,52 +209,88 @@ $(document).ready(function () {
       chooseRandomAttackValues();
 
     } // end of "if (initialClickEvent === false)"
-
-    else if (initialClickEvent === true) { // then allow for ONLY attacks 
-
-      // ATTACKS
-
-      // Click on Lightning
-      $("#htmlLightningImg").click(function () {
-        // allocate damage
-        console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
-        damagePoints = damagePoints + attacks.attackValue[0];
-        // check for win or loss
-      });
-
-      // Click on Freezeball
-      $("#htmlFreezeballImg").click(function () {
-        console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
-        damagePoints = damagePoints + attacks.attackValue[0];
-      });
-
-      // Click on Fireball
-      $("#htmlFireballImg").click(function () {
-        console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
-        damagePoints = damagePoints + attacks.attackValue[0];
-      });
-
-      // Click on X-Ray
-      $("#htmlXRayImg").click(function () {
-        console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
-        damagePoints = damagePoints + attacks.attackValue[0];
-      });
-
-
-      // Check for win or loss
-      // don't forget about audio files for kills
-
-
-      // Reset after win or loss
-      //change the player's image to black and white IF they did not die
-      //if they died, change their image to death.png
-
-
-      //Reset the gameboard after all cosplayers have been battled
-
-    } // End of "else if" allowing for attacks
-
-    // ************************************************************************
   }); // End of $(document).click(function ()
+
+  if (initialClickEvent === true) { // then allow for ONLY attacks 
+
+    // ATTACKS
+
+    // Click on Lightning
+    $("#htmlLightningImg").click(function () {
+      var afterAttack = ""; // reset
+      console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
+      damagePoints = damagePoints + attacks.attackValue[0];
+      $("#htmlDamagePoints").text(damagePoints);
+      afterAttack = checkForWinOrLoss();
+      if (afterAttack == "win") {
+        newWin();
+      }
+      else if (afterAttack == "loss") {
+        newLoss();
+      }
+      else if (afterAttack == "neither") {
+        // do nothing
+      }
+    });
+
+    // Click on Freezeball
+    // $("#htmlFreezeballImg").click(function () {
+    //   var afterAttack = ""; 
+    //   console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
+    //   damagePoints = damagePoints + attacks.attackValue[1];
+    //   $("#htmlDamagePoints").text(damagePoints);
+    //   afterAttack = checkForWinOrLoss()
+    //   if (afterAttack == "win") {
+    //     newWin();
+    //   }
+    //   else if (afterAttack == "loss") {
+    //     newLoss();
+    //   }
+    //   else if (afterAttack == "neither") {
+
+    //   }
+    // });
+
+    // Click on Fireball
+    // $("#htmlFireballImg").click(function () {
+    //   console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
+    //   damagePoints = damagePoints + attacks.attackValue[2];
+    //   $("#htmlDamagePoints").text(damagePoints);
+    //   if (checkForWinOrLoss() == "win") {
+    //     newWin();
+    //   }
+    //   else if (checkForWinOrLoss() == "loss") {
+    //     newLoss();
+    //   }
+    // });
+
+    // Click on X-Ray
+    // $("#htmlXRayImg").click(function () {
+    //   console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
+    //   damagePoints = damagePoints + attacks.attackValue[3];
+    //   $("#htmlDamagePoints").text(damagePoints);
+    //   if (checkForWinOrLoss() == "win") {
+    //     newWin();
+    //   }
+    //   else if (checkForWinOrLoss() == "loss") {
+    //     newLoss();
+    //   }
+    // });
+
+
+    // Check for win or loss
+    // don't forget about audio files for kills
+
+
+    // Reset after win or loss
+    //change the player's image to black and white IF they did not die
+    //if they died, change their image to death.png
+
+
+    //Reset the gameboard after all cosplayers have been battled
+
+  } // End of "else if" allowing for attacks
+
+  // ************************************************************************
 }); // end of $(document).ready(function()
 // End of file
