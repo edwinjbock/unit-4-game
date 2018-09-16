@@ -224,8 +224,8 @@ $(document).ready(function () {
   //  if (initialClickEvent === true) { // then allow for ONLY attacks 
 
   // Click on Lightning
-  $(document).on('touchstart click', '#htmlXRayImg', function () {
-    // $("#htmlXRayImg").click(function () {
+  $(document).on('touchstart click', '#htmlLightning', function () {
+    // $("#htmlLightning").click(function () {
     if (initialClickEvent == true) {
       afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
@@ -235,8 +235,8 @@ $(document).ready(function () {
   });
 
   // Click on Freezeball
-  $(document).on('touchstart click', '#htmlXRayImg', function () {
-    // $("#htmlXRayImg").click(function () {    
+  $(document).on('touchstart click', '#htmlFreezeball', function () {
+    // $("#htmlFreezeball").click(function () {
     if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
@@ -246,8 +246,8 @@ $(document).ready(function () {
   });
 
   // Click on Fireball
-  $(document).on('touchstart click', '#htmlXRayImg', function () {
-  // $("#htmlXRayImg").click(function () {
+  $(document).on('touchstart click', '#htmlFireball', function () {
+  // $("#htmlFireball").click(function () {
     if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
