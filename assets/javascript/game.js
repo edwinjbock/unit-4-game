@@ -51,31 +51,34 @@ $(document).ready(function () {
   // Global Functions
   function chooseRandomCosplayer() {
     console.log("***** FUNCTION CHOOSE RANDOM COSPLAYER() *****"); //TEST
-    var newCosplayer = true;
+    var newCosplayer = false;
     console.log("var newCosplayer INITIALLY=" + newCosplayer);
     console.log("cosplayerAlreadyBattled.length = " + cosplayerAlreadyBattled.length);
     if (cosplayerAlreadyBattled.length == 6) {
       // resets in case all were previously battled
       cosplayerAlreadyBattled = [];
-      for (i = 0; i++; i < cosplayer.name.length) {
+      for (i = 0; i < cosplayer.name.length; i++) {
         // reset images to color
         $(cosplayer.imageLocationID[i]).html(cosplayer.imageColor[i]);
       }
     }
     do {
       result = (Math.floor(Math.random() * cosplayer.name.length));
-      console.log("RANDOM result = " + result);
+      console.log("preliminary result = " + result);
       // Check to see if that cosplayer has battled already by comparing to the cosplayerAlreadyBattled array
-      console.log("BEFORE PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
+      console.log("BEFORE PUSH cosplayerAlreadyBattled = " + cosplayerAlreadyBattled);
       console.log("cosplayerAlreadyBattled.length = " + cosplayerAlreadyBattled.length);
-      for (j = 0; j++; j < cosplayerAlreadyBattled.length) {
-        console.log("cosplayerAlreadyBattled[" + j + "] = " + cosplayerAlreadyBattled[j]);
-        if (result == cosplayerAlreadyBattled[j]) {
-          // the result is not new
-          newCosplayer = false;
-          console.log("line 75 newCosplayer = " + newCosplayer);
-        }
+      if ($.inArray(result, cosplayerAlreadyBattled) == "-1") {
+        newCosplayer = true;
       }
+      // for (j = 0; j < cosplayerAlreadyBattled.length; j++ ) {
+      //   console.log("cosplayerAlreadyBattled[" + j + "] = " + cosplayerAlreadyBattled[j]);
+      //   if (result == cosplayerAlreadyBattled[j]) {
+      //     // the result is not new
+      //     newCosplayer = false;
+      //     console.log("newCosplayer = " + newCosplayer);
+      //   }
+      // }
       if (newCosplayer == true) {
         // the result is a new value
         console.log("newCosplayer=" + newCosplayer);
@@ -141,7 +144,7 @@ $(document).ready(function () {
       initialClickEvent = false;
     }
     else if (afterAttack == "loss") {
-      $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
+      $("#htmlResult").text("You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!! You Lost.");
       parseInt(losses);
       losses++;
       $("#htmlLosses").text(losses);
@@ -156,6 +159,7 @@ $(document).ready(function () {
       // do nothing
     }
   }
+  
   function checkForWinOrLoss() {
     console.log("***** FUNCTION CHECK FOR WIN OR LOSS() *****"); //TEST
     // compare damage and hitpoints
@@ -166,7 +170,7 @@ $(document).ready(function () {
     }
     else if (damagePoints > randomHitPoints) {
       // Loss. Killed the player.
-      console.log("return 'lose'");
+      console.log("return 'loss'");
       return "loss";
     }
     else if (damagePoints < randomHitPoints) {
@@ -219,7 +223,7 @@ $(document).ready(function () {
 
   // Click on Lightning
   $("#htmlLightningImg").click(function () {
-    if (initialClickEvent === true) {
+    if (initialClickEvent == true) {
       afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
       damagePoints = damagePoints + attacks.attackValue[0];
@@ -229,7 +233,7 @@ $(document).ready(function () {
 
   // Click on Freezeball
   $("#htmlFreezeballImg").click(function () {
-    if (initialClickEvent === true) {
+    if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
       damagePoints = damagePoints + attacks.attackValue[1];
@@ -239,7 +243,7 @@ $(document).ready(function () {
 
   // Click on Fireball
   $("#htmlFireballImg").click(function () {
-    if (initialClickEvent === true) {
+    if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
       damagePoints = damagePoints + attacks.attackValue[2];
@@ -249,7 +253,7 @@ $(document).ready(function () {
 
   // Click on X-Ray
   $("#htmlXRayImg").click(function () {
-    if (initialClickEvent === true) {
+    if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
       damagePoints = damagePoints + attacks.attackValue[3];
