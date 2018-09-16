@@ -182,7 +182,9 @@ $(document).ready(function () {
 
 
   // ********** Kick off and continue the game with click events **********
-  $(document).click(function () {
+  $(document).on('touchstart click', document, function () {
+  // $("#htmlXRayImg").click(function () {
+  // $(document).click(function () {
     if (initialClickEvent == false) {
       console.log("$(document).click(function()... initialClickEvent=" + initialClickEvent); // TEST
       // Get rid of the directions
@@ -222,7 +224,8 @@ $(document).ready(function () {
   //  if (initialClickEvent === true) { // then allow for ONLY attacks 
 
   // Click on Lightning
-  $("#htmlLightningImg").click(function () {
+  $(document).on('touchstart click', '#htmlXRayImg', function () {
+    // $("#htmlXRayImg").click(function () {
     if (initialClickEvent == true) {
       afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
@@ -232,7 +235,8 @@ $(document).ready(function () {
   });
 
   // Click on Freezeball
-  $("#htmlFreezeballImg").click(function () {
+  $(document).on('touchstart click', '#htmlXRayImg', function () {
+    // $("#htmlXRayImg").click(function () {    
     if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
@@ -242,7 +246,8 @@ $(document).ready(function () {
   });
 
   // Click on Fireball
-  $("#htmlFireballImg").click(function () {
+  $(document).on('touchstart click', '#htmlXRayImg', function () {
+  // $("#htmlXRayImg").click(function () {
     if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
@@ -252,7 +257,8 @@ $(document).ready(function () {
   });
 
   // Click on X-Ray
-  $("#htmlXRayImg").click(function () {
+  $(document).on('touchstart click', '#htmlXRayImg', function () {
+  // $("#htmlXRayImg").click(function () {
     if (initialClickEvent == true) {
       var afterAttack = ""; // reset
       console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
