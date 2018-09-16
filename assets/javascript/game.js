@@ -3,8 +3,8 @@ $(document).ready(function () {
 
   // Global Objects, Arrays and Variables related to the scripting logic
   var initialClickEvent = false;
-  var wins;
-  var losses;
+  var wins = 0;
+  var losses = 0;
   var cosplayerAlreadyBattled = [];
   var randomHitPoints = 0;
   var damagePoints = 0;
@@ -12,7 +12,7 @@ $(document).ready(function () {
   var cosplayer = {
     name: ["Jade", "Sub-Zero", "Mileena", "Raiden", "Kitana", "Liu-Kang"],
     preName: ["Phony-", "Faux-", "Fake-", "Not-Real-", "Counterfeit-", "Fake-"],
-    gender: ["female", "male", "female", "male", "female", "male",],
+    gender: ["her", "him", "her", "him", "her", "him"],
     imageLocationID: [
       "#htmlJadeImg",
       "#htmlSubZeroImg",
@@ -57,18 +57,20 @@ $(document).ready(function () {
       var result = [Math.floor(Math.random() * cosplayer.name.length)];
       console.log("RANDOM result=" + result);
       // Check to see if that cosplayer has battled already by comparing to the cosplayerAlreadyBattled array
-      if (jQuery.inArray(result, cosplayerAlreadyBattled) == "-1") {
+      console.log("BEFORE PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
+      if (jQuery.inArray(result, cosplayerAlreadyBattled) != "-1") {
+        // Then the value is in the array
+      }
+      else {
         // then result is a new value
-        newCosplayer = true;
         console.log("newCosplayer=" + newCosplayer);
         // add "result" to the cosplayerAlreadyBattled array
         cosplayerAlreadyBattled.push(result);
-        console.log("PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
-        // ????????????? change the cosplayer's image to black and white
-        // ????????????? $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
-        // then return the result
+        console.log("AFTER PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
         console.log("chooseRandomCosplayer result is " + result);
         console.log("cosplayer.name[result]=" + cosplayer.name[result]);
+        newCosplayer = true;
+        // then return the result
         return result;
       }
     } while (newCosplayer != true) // end of do-while loop
@@ -129,21 +131,6 @@ $(document).ready(function () {
     }
   } // end of function checkForWinOrLoss
 
-  function resetGameBoard() { // run when all six are done being battled
-    console.log("function resetGameBoard()"); //TEST
-    $("#htmlResult").text("");
-    $("#htmlMessage").text("");
-    $("#htmlHitPoints").text("");
-    $("#htmlDamagePoints").text("0");
-    // reset cosplayer images to color
-    for (i = 0; i < cosplayer.length; i++) {
-      $(cosplayer[i].imageLocationID).html(cosplayer[i].imageColor);
-    }
-    // Clear Objects, arrays, vars
-    cosplayerAlreadyBattled = [];
-    attacks.attackValue = [];
-  } // end of function resetGameBoard
-
 
   // ********** Kick off and continue the game with click events **********
   $(document).click(function () {
@@ -160,8 +147,11 @@ $(document).ready(function () {
       console.log("initialClickEvent set to true... initialClickEvent=" + initialClickEvent); // TEST
 
       // Clears the You Won/You Lost message
-      $("#htmlResult").text("");
+      // $("#htmlResult").text("");
       $("#htmlMessage").text("");
+      damagePoints = 0;
+      $("#htmlDamagePoints").text(damagePoints);
+      
 
       // Choose a random cosplayer that hasn't been attacked this round
       cosplayerRandomlyChosen = chooseRandomCosplayer();
@@ -169,7 +159,7 @@ $(document).ready(function () {
 
       // Change their picture to black and white inverted. Then send a msg who is being attacked
       $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBWi[cosplayerRandomlyChosen]);
-      $("#htmlMessage").text("You are fighting " + cosplayer.preName[cosplayerRandomlyChosen] + cosplayer.name[cosplayerRandomlyChosen]);
+      $("#htmlMessage").text("You are now fighting " + cosplayer.preName[cosplayerRandomlyChosen] + cosplayer.name[cosplayerRandomlyChosen]);
 
       // chooseRandomHitPoints(); 
       randomHitPoints = chooseRandomHitPoints();
@@ -184,29 +174,35 @@ $(document).ready(function () {
 
   // ATTACKS
   //  if (initialClickEvent === true) { // then allow for ONLY attacks 
+
   // Click on Lightning
   $("#htmlLightningImg").click(function () {
     if (initialClickEvent === true) {
-      var afterAttack = ""; // reset
+      afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
       damagePoints = damagePoints + attacks.attackValue[0];
       $("#htmlDamagePoints").text(damagePoints);
       afterAttack = checkForWinOrLoss();
       if (afterAttack == "win") {
-        $("#htmlMessage").text("You won!");
-        window.wins++;
-        $("#htmlWins").text(window.wins);
+        $("#htmlResult").text("You won!");
+        parseInt(wins);
+        wins++;
+        $("#htmlWins").text(wins);
         // Change the image to black and white
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+        initialClickEvent = false;
       }
       else if (afterAttack == "loss") {
-        $("#htmlMessage").text("You Lost. You killed a civilian!!!");
-        $("#htmlLosses").text(window.losses++);
+        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] +"!!!");
+        parseInt(losses);
+        losses++;
+        $("#htmlLosses").text(losses);
         // Change the image to deathImage
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // don't forget about audio files for kills
-        // ______________________________INSERT CODE_________________________________
-        $.playSound("assets/audio/scream-male.mp3");
+        // function timeOut() {
+        // }
+        // setTimeout(timeOut, 3000);
+        initialClickEvent = false;
       }
       else if (afterAttack == "neither") {
         // do nothing
@@ -223,20 +219,25 @@ $(document).ready(function () {
       $("#htmlDamagePoints").text(damagePoints);
       afterAttack = checkForWinOrLoss();
       if (afterAttack == "win") {
-        $("#htmlMessage").text("You won!");
-        window.wins++;
-        $("#htmlWins").text(window.wins);
+        $("#htmlResult").text("You won!");
+        parseInt(wins);
+        wins++;
+        $("#htmlWins").text(wins);
         // Change the image to black and white
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+        initialClickEvent = false;
       }
       else if (afterAttack == "loss") {
-        $("#htmlMessage").text("You Lost. You killed a civilian!!!");
-        $("#htmlLosses").text(window.losses++);
+        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
+        parseInt(losses);
+        losses++;
+        $("#htmlLosses").text(losses);
         // Change the image to deathImage
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // don't forget about audio files for kills
-        // ______________________________INSERT CODE_________________________________
-        $.playSound("assets/audio/scream-male.mp3");
+        // function timeOut() {
+        // }
+        // setTimeout(timeOut, 3000);
+        initialClickEvent = false;
       }
       else if (afterAttack == "neither") {
         // do nothing
@@ -253,20 +254,25 @@ $(document).ready(function () {
       $("#htmlDamagePoints").text(damagePoints);
       afterAttack = checkForWinOrLoss();
       if (afterAttack == "win") {
-        $("#htmlMessage").text("You won!");
-        window.wins++;
-        $("#htmlWins").text(window.wins);
+        $("#htmlResult").text("You won!");
+        parseInt(wins);
+        wins++;
+        $("#htmlWins").text(wins);
         // Change the image to black and white
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+        initialClickEvent = false;
       }
       else if (afterAttack == "loss") {
-        $("#htmlMessage").text("You Lost. You killed a civilian!!!");
-        $("#htmlLosses").text(window.losses++);
+        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
+        parseInt(losses);
+        losses++;
+        $("#htmlLosses").text(losses);
         // Change the image to deathImage
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // don't forget about audio files for kills
-        // ______________________________INSERT CODE_________________________________
-        $.playSound("assets/audio/scream-male.mp3");
+        // function timeOut() {
+        // }
+        // setTimeout(timeOut, 3000);
+        initialClickEvent = false;
       }
       else if (afterAttack == "neither") {
         // do nothing
@@ -283,20 +289,25 @@ $(document).ready(function () {
       $("#htmlDamagePoints").text(damagePoints);
       afterAttack = checkForWinOrLoss();
       if (afterAttack == "win") {
-        $("#htmlMessage").text("You won!");
-        window.wins++;
-        $("#htmlWins").text(window.wins);
+        $("#htmlResult").text("You won!");
+        parseInt(wins);
+        wins++;
+        $("#htmlWins").text(wins);
         // Change the image to black and white
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+        initialClickEvent = false;
       }
       else if (afterAttack == "loss") {
-        $("#htmlMessage").text("You Lost. You killed a civilian!!!");
-        $("#htmlLosses").text(window.losses++);
+        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
+        parseInt(losses);
+        losses++;
+        $("#htmlLosses").text(losses);
         // Change the image to deathImage
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // don't forget about audio files for kills
-        // ______________________________INSERT CODE_________________________________
-        $.playSound("assets/audio/scream-male.mp3");
+        // function timeOut() {
+        // }
+        // setTimeout(timeOut, 3000);
+        initialClickEvent = false;
       }
       else if (afterAttack == "neither") {
         // do nothing
@@ -304,13 +315,12 @@ $(document).ready(function () {
     }
   });
 
-  // Reset after win or loss
-  //change the player's image to black and white IF they did not die
-  //if they died, change their image to death.png
-
-
+  // ********** FUNCTIONALITY REMAINING TO BE COMPLETED **************
+  //  Reset after win or loss
+      // 
+  // change the player's image to black and white IF they did not die
+  // if they died, change their image to death.png
   //Reset the gameboard after all cosplayers have been battled
 
-  // ************************************************************************
 }); // end of $(document).ready(function()
 // End of file
