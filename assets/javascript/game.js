@@ -50,19 +50,34 @@ $(document).ready(function () {
 
   // Global Functions
   function chooseRandomCosplayer() {
-    console.log("function chooseRandomCosplayer()"); //TEST
-    var newCosplayer = false;
+    console.log("***** FUNCTION CHOOSE RANDOM COSPLAYER() *****"); //TEST
+    var newCosplayer = true;
     console.log("var newCosplayer INITIALLY=" + newCosplayer);
+    console.log("cosplayerAlreadyBattled.length = " + cosplayerAlreadyBattled.length);
+    if (cosplayerAlreadyBattled.length == 6) {
+      // resets in case all were previously battled
+      cosplayerAlreadyBattled = [];
+      for (i = 0; i++; i < cosplayer.name.length) {
+        // reset images to color
+        $(cosplayer.imageLocationID[i]).html(cosplayer.imageColor[i]);
+      }
+    }
     do {
-      var result = [Math.floor(Math.random() * cosplayer.name.length)];
-      console.log("RANDOM result=" + result);
+      result = (Math.floor(Math.random() * cosplayer.name.length));
+      console.log("RANDOM result = " + result);
       // Check to see if that cosplayer has battled already by comparing to the cosplayerAlreadyBattled array
       console.log("BEFORE PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
-      if (jQuery.inArray(result, cosplayerAlreadyBattled) != "-1") {
-        // Then the value is in the array
+      console.log("cosplayerAlreadyBattled.length = " + cosplayerAlreadyBattled.length);
+      for (j = 0; j++; j < cosplayerAlreadyBattled.length) {
+        console.log("cosplayerAlreadyBattled[" + j + "] = " + cosplayerAlreadyBattled[j]);
+        if (result == cosplayerAlreadyBattled[j]) {
+          // the result is not new
+          newCosplayer = false;
+          console.log("line 75 newCosplayer = " + newCosplayer);
+        }
       }
-      else {
-        // then result is a new value
+      if (newCosplayer == true) {
+        // the result is a new value
         console.log("newCosplayer=" + newCosplayer);
         // add "result" to the cosplayerAlreadyBattled array
         cosplayerAlreadyBattled.push(result);
@@ -73,11 +88,12 @@ $(document).ready(function () {
         // then return the result
         return result;
       }
-    } while (newCosplayer != true) // end of do-while loop
+    }
+    while (newCosplayer == false); // end of do-while loop
   } // end of chooseRandomCosplayer function
 
   function chooseRandomAttackValues() {
-    console.log("function chooseRandomAttackValues()"); //TEST
+    console.log("***** FUNCTION CHOOSE RANDOM ATTACK VALUES() *****"); //TEST
     // must be between 1-12
     attacks.attackValue = []; // reset
     var value;
@@ -100,7 +116,7 @@ $(document).ready(function () {
   } // end of function chooseRandomAttackValues
 
   function chooseRandomHitPoints() {
-    console.log("function chooseRandomHitPoints()"); //TEST
+    console.log("***** FUNCTION CHOOSE RANDOM HITPOINTS() *****"); //TEST
     // must be between 19-120
     var value;
     do {
@@ -111,8 +127,37 @@ $(document).ready(function () {
     return value;
   }
 
+  function recordDamageAndResult() {
+    console.log("***** FUNCTION RECORD DAMAGE AND TEXT() *****"); //TEST
+    $("#htmlDamagePoints").text(damagePoints);
+    afterAttack = checkForWinOrLoss();
+    if (afterAttack == "win") {
+      $("#htmlResult").text("You won!");
+      parseInt(wins);
+      wins++;
+      $("#htmlWins").text(wins);
+      // Change the image to black and white
+      $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+      initialClickEvent = false;
+    }
+    else if (afterAttack == "loss") {
+      $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
+      parseInt(losses);
+      losses++;
+      $("#htmlLosses").text(losses);
+      // Change the image to deathImage
+      $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
+      // function timeOut() {
+      // }
+      // setTimeout(timeOut, 3000);
+      initialClickEvent = false;
+    }
+    else if (afterAttack == "neither") {
+      // do nothing
+    }
+  }
   function checkForWinOrLoss() {
-    console.log("function checkForWinOrLoss()"); //TEST
+    console.log("***** FUNCTION CHECK FOR WIN OR LOSS() *****"); //TEST
     // compare damage and hitpoints
     if (damagePoints == randomHitPoints) {
       // Win
@@ -134,16 +179,11 @@ $(document).ready(function () {
 
   // ********** Kick off and continue the game with click events **********
   $(document).click(function () {
-    if (initialClickEvent === false) {
-      if (cosplayerAlreadyBattled.length == 6) {
-        // resets in case all were previously battled
-        cosplayerAlreadyBattled = [];
-      }
+    if (initialClickEvent == false) {
       console.log("$(document).click(function()... initialClickEvent=" + initialClickEvent); // TEST
       // Get rid of the directions
       $("#htmlDirections").text("");
-      // record initial click event as performed
-      initialClickEvent = true;
+
       console.log("initialClickEvent set to true... initialClickEvent=" + initialClickEvent); // TEST
 
       // Clears the You Won/You Lost message
@@ -151,7 +191,6 @@ $(document).ready(function () {
       $("#htmlMessage").text("");
       damagePoints = 0;
       $("#htmlDamagePoints").text(damagePoints);
-      
 
       // Choose a random cosplayer that hasn't been attacked this round
       cosplayerRandomlyChosen = chooseRandomCosplayer();
@@ -168,6 +207,9 @@ $(document).ready(function () {
       // choose random attack values
       chooseRandomAttackValues();
 
+      // record initial click event as performed
+      initialClickEvent = true;
+
     } // end of "if (initialClickEvent === false)"
   }); // End of $(document).click(function ()
 
@@ -181,32 +223,7 @@ $(document).ready(function () {
       afterAttack = ""; // reset
       console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
       damagePoints = damagePoints + attacks.attackValue[0];
-      $("#htmlDamagePoints").text(damagePoints);
-      afterAttack = checkForWinOrLoss();
-      if (afterAttack == "win") {
-        $("#htmlResult").text("You won!");
-        parseInt(wins);
-        wins++;
-        $("#htmlWins").text(wins);
-        // Change the image to black and white
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "loss") {
-        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] +"!!!");
-        parseInt(losses);
-        losses++;
-        $("#htmlLosses").text(losses);
-        // Change the image to deathImage
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // function timeOut() {
-        // }
-        // setTimeout(timeOut, 3000);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "neither") {
-        // do nothing
-      }
+      recordDamageAndResult();
     }
   });
 
@@ -216,32 +233,7 @@ $(document).ready(function () {
       var afterAttack = ""; // reset
       console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
       damagePoints = damagePoints + attacks.attackValue[1];
-      $("#htmlDamagePoints").text(damagePoints);
-      afterAttack = checkForWinOrLoss();
-      if (afterAttack == "win") {
-        $("#htmlResult").text("You won!");
-        parseInt(wins);
-        wins++;
-        $("#htmlWins").text(wins);
-        // Change the image to black and white
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "loss") {
-        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
-        parseInt(losses);
-        losses++;
-        $("#htmlLosses").text(losses);
-        // Change the image to deathImage
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // function timeOut() {
-        // }
-        // setTimeout(timeOut, 3000);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "neither") {
-        // do nothing
-      }
+      recordDamageAndResult();
     }
   });
 
@@ -251,32 +243,7 @@ $(document).ready(function () {
       var afterAttack = ""; // reset
       console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
       damagePoints = damagePoints + attacks.attackValue[2];
-      $("#htmlDamagePoints").text(damagePoints);
-      afterAttack = checkForWinOrLoss();
-      if (afterAttack == "win") {
-        $("#htmlResult").text("You won!");
-        parseInt(wins);
-        wins++;
-        $("#htmlWins").text(wins);
-        // Change the image to black and white
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "loss") {
-        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
-        parseInt(losses);
-        losses++;
-        $("#htmlLosses").text(losses);
-        // Change the image to deathImage
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // function timeOut() {
-        // }
-        // setTimeout(timeOut, 3000);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "neither") {
-        // do nothing
-      }
+      recordDamageAndResult();
     }
   });
 
@@ -286,41 +253,9 @@ $(document).ready(function () {
       var afterAttack = ""; // reset
       console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
       damagePoints = damagePoints + attacks.attackValue[3];
-      $("#htmlDamagePoints").text(damagePoints);
-      afterAttack = checkForWinOrLoss();
-      if (afterAttack == "win") {
-        $("#htmlResult").text("You won!");
-        parseInt(wins);
-        wins++;
-        $("#htmlWins").text(wins);
-        // Change the image to black and white
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "loss") {
-        $("#htmlResult").text("You Lost. You killed " + cosplayer.gender[cosplayerRandomlyChosen] + "!!!");
-        parseInt(losses);
-        losses++;
-        $("#htmlLosses").text(losses);
-        // Change the image to deathImage
-        $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(deathImage);
-        // function timeOut() {
-        // }
-        // setTimeout(timeOut, 3000);
-        initialClickEvent = false;
-      }
-      else if (afterAttack == "neither") {
-        // do nothing
-      }
+      recordDamageAndResult();
     }
   });
-
-  // ********** FUNCTIONALITY REMAINING TO BE COMPLETED **************
-  //  Reset after win or loss
-      // 
-  // change the player's image to black and white IF they did not die
-  // if they died, change their image to death.png
-  //Reset the gameboard after all cosplayers have been battled
 
 }); // end of $(document).ready(function()
 // End of file
