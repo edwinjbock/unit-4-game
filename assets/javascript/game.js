@@ -47,6 +47,7 @@ $(document).ready(function () {
     attackValue: []
   };
   var deathImage = "<img src='assets/images/death.png' alt='Dead Cosplayer'>";
+  var victoryImage = "<img src='assets/images/victory.png' alt='Live Cosplayer'>";
 
   // Global Functions
   function chooseRandomCosplayer() {
@@ -71,14 +72,6 @@ $(document).ready(function () {
       if ($.inArray(result, cosplayerAlreadyBattled) == "-1") {
         newCosplayer = true;
       }
-      // for (j = 0; j < cosplayerAlreadyBattled.length; j++ ) {
-      //   console.log("cosplayerAlreadyBattled[" + j + "] = " + cosplayerAlreadyBattled[j]);
-      //   if (result == cosplayerAlreadyBattled[j]) {
-      //     // the result is not new
-      //     newCosplayer = false;
-      //     console.log("newCosplayer = " + newCosplayer);
-      //   }
-      // }
       if (newCosplayer == true) {
         // the result is a new value
         console.log("newCosplayer=" + newCosplayer);
@@ -140,7 +133,7 @@ $(document).ready(function () {
       wins++;
       $("#htmlWins").text(wins);
       // Change the image to black and white
-      $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
+      $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(victoryImage);
       initialClickEvent = false;
     }
     else if (afterAttack == "loss") {
