@@ -2,9 +2,9 @@
 $(document).ready(function () {
 
   // Global Objects, Arrays and Variables related to the scripting logic
+  var initialClickEvent = false;
   var wins = 0;
   var losses = 0;
-  var initialClickEvent = false;
   var cosplayerAlreadyBattled = [];
   var randomHitPoints = 0;
   var damagePoints = 0;
@@ -50,13 +50,12 @@ $(document).ready(function () {
 
   // Global Functions
   function chooseRandomCosplayer() {
+    console.log("function chooseRandomCosplayer()"); //TEST
     var newCosplayer = false;
+    console.log("var newCosplayer INITIALLY=" + newCosplayer);
     do {
       var result = [Math.floor(Math.random() * cosplayer.name.length)];
-      console.log("chooseRandomCosplayer result is " + result);
-      console.log("newCosplayer=" + newCosplayer);
-      console.log("cosplayer.name[result]=" + cosplayer.name[result]);
-
+      console.log("RANDOM result=" + result);
       // Check to see if that cosplayer has battled already by comparing to the cosplayerAlreadyBattled array
       if (jQuery.inArray(result, cosplayerAlreadyBattled) == "-1") {
         // then result is a new value
@@ -64,36 +63,106 @@ $(document).ready(function () {
         console.log("newCosplayer=" + newCosplayer);
         // add "result" to the cosplayerAlreadyBattled array
         cosplayerAlreadyBattled.push(result);
+        console.log("PUSH cosplayerAlreadyBattled: " + cosplayerAlreadyBattled);
         // change the cosplayer's image to black and white
         $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBW[cosplayerRandomlyChosen]);
         // then return the result
+        console.log("chooseRandomCosplayer result is " + result);
+        console.log("cosplayer.name[result]=" + cosplayer.name[result]);
         return result;
       }
     } while (newCosplayer != true) // end of do-while loop
   } // end of chooseRandomCosplayer function
 
   function chooseRandomAttackValues() {
+    console.log("function chooseRandomAttackValues()"); //TEST
     // must be between 1-12
     var value;
     for (i = 0; i < attacks.name.length; i++) {
-      value = [Math.floor(Math.random() * 12)];
+      var value = [Math.floor(Math.random() * 11)];
+      value++;
       if (value == 0) {
         value++;
       }
-      (attacks.attackValue).push(value);
+      if (jQuery.inArray(value, attacks.attackValue) == "-1") {
+        (attacks.attackValue).push(value);
+        console.log("attacks.attackValue pushed = " + attacks.attackValue);
+      }
+      else {
+        i--; // guarantees that the same iteration will be run again
+        console.log("attacks.attackValue NOT pushed = " + attacks.attackValue);
+      }
+      console.log("ALL attacks.attackValue = " + attacks.attackValue);
     }
-    console.log("attacks.attackValue=" + attacks.attackValue);
   } // end of function chooseRandomAttackValues
 
   function chooseRandomHitPoints() {
+    console.log("function chooseRandomHitPoints()"); //TEST
     // must be between 19-120
-    var value = [Math.floor(Math.random() * 120)];
-    if ((value >= 19) && (value <= 120)) {
-      return value;
-    }
+    var value;
+    do {
+      value = [Math.floor(Math.random() * 101)];
+      console.log("looped chooseRandomHitPoints = " + value);
+    } while ((value < 19) || (value > 120)) // end of do-while loop
+    console.log("final chooseRandomHitPoints = " + value);
+    return value;
   }
 
+
+
+
+
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  function checkForWinOrLoss() {
+    console.log("function checkForWinOrLoss()"); //TEST
+    var youLose = false;
+    var youWin = false;
+    // compare damage and hitpoints
+    if (damagePoints == randomHitPoints) {
+      // Win
+      wins++;
+      youWin = true;
+
+
+
+    }
+    else if (damagePoints > randomHitPoints) {
+      // Loss
+      losses++;
+      youLose = true;
+
+
+
+    }
+    else if (damagePoints < randomHitPoints) {
+      // continue the game
+
+    }
+    initialClickEvent = false; // allows for $(document).click again
+
+    // call newWin or newLoss if either
+    // ELSE return
+  } // end of function checkForWinOrLoss
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  function newWin() {
+    console.log("function newWin()"); //TEST
+    wins++;
+    $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
+    attacks.attackValue = [];
+  } // end of function newWin
+
+
+  function newLoss() {
+    console.log("function newLoss()"); //TEST
+    losses++;
+    $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
+    attacks.attackValue = [];
+  } // end of function newLoss
+
+
   function resetGameBoard() { // run when all six are done being battled
+    console.log("function resetGameBoard()"); //TEST
     $("#htmlResult").text("");
     $("#htmlMessage").text("");
     $("#htmlHitPoints").text("");
@@ -107,35 +176,24 @@ $(document).ready(function () {
     attacks.attackValue = [];
   } // end of function resetGameBoard
 
-  function newWin() {
-    wins++;
-    $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
-    attacks.attackValue = [];
-  } // end of function newWin
 
-  function newLoss() {
-    losses++;
-    $("#htmlMessage").text("You beat " + cosplayer[cosplayerRandomlyChosen].name + "!");
-    attacks.attackValue = [];
-  } // end of function newLoss
-
-
-  // Kick off the game with a click event
+  // ********** Kick off and continue the game with a click event **********
   $(document).click(function () {
-
+    console.log("$(document).click(function()... initialClickEvent=" + initialClickEvent); // TEST
     if (initialClickEvent === false) {
       // Get rid of the directions
       $("#htmlDirections").text("");
       // record initial click event as performed
       initialClickEvent = true;
+      console.log("initialClickEvent set to true... initialClickEvent=" + initialClickEvent); // TEST
+
       // Clears the You Won/You Lost message
       $("#htmlResult").text("");
       $("#htmlMessage").text("");
 
-
       // Choose a random cosplayer that hasn't been attacked this round
       cosplayerRandomlyChosen = chooseRandomCosplayer();
-      console.log("Random Player: " + cosplayerRandomlyChosen);
+      console.log("FUNCTION RETURNED cosplayerRandomlyChosen=" + cosplayerRandomlyChosen);
 
       // Change their picture to black and white inverted. Then send a msg who is being attacked
       $(cosplayer.imageLocationID[cosplayerRandomlyChosen]).html(cosplayer.imageBWi[cosplayerRandomlyChosen]);
@@ -147,41 +205,52 @@ $(document).ready(function () {
 
       // choose random attack values
       chooseRandomAttackValues();
+
     } // end of "if (initialClickEvent === false)"
 
-    // ******************* NEED TO FINISH FROM HERE ON DOWN *******************************
-    //  PROBLEM: 
+    else if (initialClickEvent === true) { // then allow for ONLY attacks 
 
-    // ATTACKS
-    $("#htmlLightningImg").click(function () {
+      // ATTACKS
+
       // Click on Lightning
-    });
+      $("#htmlLightningImg").click(function () {
+        // allocate damage
+        console.log("Lightening Attack = damagePoints + attacks.attackValue[0] = " + damagePoints + "+" + attacks.attackValue[0]);
+        damagePoints = damagePoints + attacks.attackValue[0];
+        // check for win or loss
+      });
 
-    $("#htmlFreezeballImg").click(function () {
       // Click on Freezeball
-    });
+      $("#htmlFreezeballImg").click(function () {
+        console.log("Freezeball Attack = damagePoints + attacks.attackValue[1] = " + damagePoints + "+" + attacks.attackValue[1]);
+        damagePoints = damagePoints + attacks.attackValue[0];
+      });
 
-    $("#htmlFireballImg").click(function () {
       // Click on Fireball
-    });
+      $("#htmlFireballImg").click(function () {
+        console.log("Fireball Attack = damagePoints + attacks.attackValue[2] = " + damagePoints + "+" + attacks.attackValue[2]);
+        damagePoints = damagePoints + attacks.attackValue[0];
+      });
 
-    $("#htmlXRayImg").click(function () {
       // Click on X-Ray
-    });
+      $("#htmlXRayImg").click(function () {
+        console.log("X-Ray Attack = damagePoints + attacks.attackValue[3] = " + damagePoints + "+" + attacks.attackValue[3]);
+        damagePoints = damagePoints + attacks.attackValue[0];
+      });
 
 
-    // Check for win or loss
-    // don't forget about audio files for kills
+      // Check for win or loss
+      // don't forget about audio files for kills
 
 
-    // Reset after win or loss
-    initialClickEvent = false; // allows for $(document).click again
-    //change the player's image to black and white IF they did not die
-    //if they died, change their image to death.png
+      // Reset after win or loss
+      //change the player's image to black and white IF they did not die
+      //if they died, change their image to death.png
 
 
-    //Reset the gameboard after all cosplayers have been battled
+      //Reset the gameboard after all cosplayers have been battled
 
+    } // End of "else if" allowing for attacks
 
     // ************************************************************************
   }); // End of $(document).click(function ()
